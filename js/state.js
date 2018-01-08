@@ -30,14 +30,24 @@ function play() {
     //baby 和 礼物图片的叠加
     imgBaby = game.add.sprite(0, 0, 'goodsOne');
 
-    var tween = game.add.tween(imgBaby);
-    tween.delay(500).to({ x: 0 }, 1000).to({y: 300 }, 5000);
-    tween.start();
-    tween.loop(); //循环效果
+    // var tween = game.add.tween(imgBaby);
+    // tween.delay(500).to({ x: 0 }, 1000).to({y: 300 }, 5000);
+    // tween.start();
+    // tween.loop(); //循环效果
+
+    //启动并添加物理效果
+    game.physics.enable(imgBaby, Phaser.Physics.ARCADE);
+    
+
+    
+
+
 
     game.add.sprite(0, 0, 'babyImg').kill();
     imgBabyy = game.add.sprite(0, game.height / 2, 'goodsOne');
     game.add.sprite(0, game.height / 2, 'babyImg').kill();
+
+    game.physics.enable(imgBabyy, Phaser.Physics.ARCADE);
 
     //望远镜 和 礼物图片的叠加
     imgSee = game.add.sprite(game.width / 3, 0, 'goodsTwo');
@@ -50,6 +60,9 @@ function play() {
     game.add.sprite(game.width / 1.5, 0, 'peekabooImg').kill();
     imgPeoplee = game.add.sprite(game.width / 1.5, game.height / 2, 'goodsThree');
     game.add.sprite(game.width / 1.5, game.height / 2, 'peekabooImg').kill();
+
+    game.physics.enable(imgPeople, Phaser.Physics.ARCADE);
+    
 
     //背景音乐
     music = game.add.audio('sound');
@@ -79,6 +92,19 @@ function play() {
     imgPeoplee.inputEnabled = true; //这里启动相关操作，比如，鼠标点击等等
     imgPeoplee.events.onInputDown.add(this.listenerPeoo, this);
 
+  }
+
+  this.update = function () {
+    //处理图片运动，使用速率效果
+    imgBaby.body.velocity.x = 200; //x轴的速率效果
+    imgBaby.body.velocity.y = 250; //y轴的逆向速率效果，数值越大移动越快
+
+    imgBabyy.body.velocity.x = 55; //x轴的速率效果
+    imgBabyy.body.velocity.y = 25; //y轴的逆向速率效果，数值越大移动越快
+
+    imgPeople.body.velocity.x = -10; //x轴的速率效果
+    imgPeople.body.velocity.y = 30; //y轴的逆向速率效果，数值越大移动越快
+    // console.log(imgBaby.body.height)
   }
 
   //控制图片显示与隐藏 同时调用音乐

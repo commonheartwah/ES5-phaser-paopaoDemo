@@ -7,6 +7,7 @@ var game = new Phaser.Game(1334, 750, Phaser.CANVAS, 'game', {
 
 function init() {
   game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;//缩放控制
+  // game.scale.setUserScale(1, 0.5);
 }
 
 function preload() {
